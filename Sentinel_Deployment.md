@@ -6,7 +6,8 @@
 
 -    Created an Ubuntu VM (`non-vulnerable-01`) with OpenSSH port 22 open to the internet, placed in resource group `orangutan-labs`.
 
-   <img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/5a63918d-f3b6-4a8f-823b-1de21000c12d" />
+   <img width="1623" height="734" alt="8" src="https://github.com/user-attachments/assets/342cf9d0-00a1-4bba-801a-9912fb5c574d" />
+
 
 -    Verified local SSH connectivity.
 
@@ -18,10 +19,10 @@
 
 - Created a Log Analytics workspace (`monkey-watch`) and enabled Azure Sentinel.
 
-<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/6c5509b5-b2f7-4439-b980-a545c670f942" />
+<img width="1625" height="737" alt="7" src="https://github.com/user-attachments/assets/5154298d-4418-437b-bb0c-3c9db94bf504" />
 
+<img width="1759" height="798" alt="6" src="https://github.com/user-attachments/assets/3b467981-3575-419d-b827-03afaac3b323" />
 
-<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/4eda89e3-7031-4ddf-a49b-a901ba45d393" />
 
 3. **Log Collection Configuration**
 
@@ -29,22 +30,25 @@
 
 <img width="3334" height="1860" alt="Image" src="https://github.com/user-attachments/assets/8be0a259-d046-4d81-8aad-8acedd0311df" />
 
-<img width="1916" height="996" alt="Image" src="https://github.com/user-attachments/assets/73a49bca-05b1-4ccf-8162-ba9b82064679" />
+<img width="1759" height="798" alt="5" src="https://github.com/user-attachments/assets/dcb30970-b665-48bd-a321-beefb4c47cdb" />
+
 
 <img width="1919" height="993" alt="Image" src="https://github.com/user-attachments/assets/e28eebfa-20b8-4d3e-955f-6adda45be2f4" />
 
 - Created a **Data Collection Rule (DCR)** associated with the VM, defining which log facilities and severity levels to forward.
 
-<img width="1920" height="995" alt="Image" src="https://github.com/user-attachments/assets/1c110950-dfa8-4c4f-aa43-9ae0e3c9c875" />
+<img width="1757" height="800" alt="4" src="https://github.com/user-attachments/assets/ec2a58f3-d24d-4b49-8dcd-c646f45f9d56" />
 
-<img width="1915" height="995" alt="Image" src="https://github.com/user-attachments/assets/93f8ca25-b9be-45d2-936c-b92fcaca76af" />
+
+<img width="1763" height="802" alt="3" src="https://github.com/user-attachments/assets/6f7bde31-9623-4b43-820e-8bc8ec8b99d2" />
 
 
 4. **Troubleshooting & Refinement using **
 
 - Initial issue: No syslog data appeared in Sentinel after 20+ minutes (only heartbeat logs).
 
-<img width="1918" height="998" alt="Image" src="https://github.com/user-attachments/assets/fa9b8f88-5ccd-48a0-928e-a8c87d893cc7" />
+<img width="1760" height="797" alt="2" src="https://github.com/user-attachments/assets/f2ce1081-3240-40f8-9d87-cd8ff10077e3" />
+
 
 - Used the Azure observability agent (Logs tab) to query VM logs – confirmed heartbeats present, but no Syslog table.
 
@@ -86,7 +90,8 @@ Result: Within 30 minutes, over 1,000 syslog events ingested, and the Syslog tab
 
 - Observed multiple failed SSH login attempts from various IPs (e.g., Romania) hitting the exposed VM.
 
-<img width="1316" height="825" alt="Image" src="https://github.com/user-attachments/assets/0ce8995b-7cf9-437c-a8e4-9952063a1b17" />
+<img width="1417" height="889" alt="1" src="https://github.com/user-attachments/assets/53c6c4c9-4f7e-4cc6-ba48-6c0656ae8f08" />
+
 
 <img width="1914" height="983" alt="Image" src="https://github.com/user-attachments/assets/52c37c86-bb7e-4208-8395-99cc894ffc73" />
 
@@ -101,7 +106,8 @@ Result: Within 30 minutes, over 1,000 syslog events ingested, and the Syslog tab
 
 - Sentinel Alerts triggered
 
-<img width="1914" height="989" alt="Image" src="https://github.com/user-attachments/assets/d4ef7dac-0d74-4ce7-bb41-7e243258b855" />
+<img width="1825" height="860" alt="10 0" src="https://github.com/user-attachments/assets/cde7752c-c12e-4e51-88db-82c5995b4986" />
+
 
 ### Key Learnings
 
