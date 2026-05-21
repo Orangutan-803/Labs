@@ -30,8 +30,7 @@
 
 <img width="3334" height="1860" alt="Image" src="https://github.com/user-attachments/assets/8be0a259-d046-4d81-8aad-8acedd0311df" />
 
-<img width="1759" height="798" alt="5" src="https://github.com/user-attachments/assets/dcb30970-b665-48bd-a321-beefb4c47cdb" />
-
+<img width="1767" height="800" alt="9" src="https://github.com/user-attachments/assets/896cdf46-8f19-44ab-baaf-a88b9bec6227" />
 
 <img width="1919" height="993" alt="Image" src="https://github.com/user-attachments/assets/e28eebfa-20b8-4d3e-955f-6adda45be2f4" />
 
@@ -52,7 +51,8 @@
 
 - Used the Azure observability agent (Logs tab) to query VM logs – confirmed heartbeats present, but no Syslog table.
 
-<img width="1920" height="995" alt="Image" src="https://github.com/user-attachments/assets/c1b057ae-d597-4f7e-a4c9-ccc033547c83" />
+<img width="1515" height="790" alt="11" src="https://github.com/user-attachments/assets/dbae8259-4bd6-4587-8b71-3f1b3c353485" />
+
 
 <img width="924" height="202" alt="Image" src="https://github.com/user-attachments/assets/cdb99ae3-700c-4b27-8b14-b90b3c5c4c5b" />
 
@@ -106,7 +106,7 @@ Result: Within 30 minutes, over 1,000 syslog events ingested, and the Syslog tab
 
 - Sentinel Alerts triggered
 
-<img width="1825" height="860" alt="10 0" src="https://github.com/user-attachments/assets/cde7752c-c12e-4e51-88db-82c5995b4986" />
+<img width="1822" height="814" alt="12" src="https://github.com/user-attachments/assets/37ca5064-5b3b-4a6f-a16a-6444d81e627b" />
 
 
 ### Key Learnings
