@@ -32,7 +32,8 @@
 
 <img width="1767" height="800" alt="9" src="https://github.com/user-attachments/assets/896cdf46-8f19-44ab-baaf-a88b9bec6227" />
 
-<img width="1919" height="993" alt="Image" src="https://github.com/user-attachments/assets/e28eebfa-20b8-4d3e-955f-6adda45be2f4" />
+<img width="1764" height="805" alt="13" src="https://github.com/user-attachments/assets/4a9f9e46-48c1-43f6-bf22-b52dc98b0553" />
+
 
 - Created a **Data Collection Rule (DCR)** associated with the VM, defining which log facilities and severity levels to forward.
 
