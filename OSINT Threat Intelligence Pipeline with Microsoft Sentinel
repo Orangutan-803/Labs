@@ -1,0 +1,68 @@
+Overview
+
+Integrated open-source threat intelligence into Microsoft Sentinel by deploying a self-hosted MISP (Malware Information Sharing Platform) instance on Azure. Built a real-time pipeline to map Sentinel logs with OSINT feeds using Python and API calls.
+
+Technical Architecture
+    • Cloud Platform: Microsoft Azure (free trial & free services tier)
+    • Compute: Ubuntu VM (custom size with sufficient CPU cores after resource constraint analysis)
+    • Containerization: Docker – isolated MISP deployment, preserving VM for future multi-service use
+    • Threat Intelligence Platform: MISP (open-source, GitHub misp-docker repo)
+    • Integration Layer: Python script running alongside MISP (Azure Functions attempted but limited by trial subscription)
+    • SIEM: Microsoft Sentinel (Log Analytics workspace, Threat Intelligence indicators table)
+
+Implementation Steps
+1. Azure Infrastructure Provisioning
+    • Used Azure CLI for all resource management
+    • Initially deployed a free-tier VM → encountered CPU limitations causing system hangs during MISP install
+    • Redeployed with a higher-core VM to meet computational demands
+
+
+
+    • Configured budget alerts to prevent cost surprises after a credit glitch (Azure free credits temporarily disappeared)
+2. MISP Deployment (Docker-based)
+    • Installed Docker on Ubuntu VM following official docs
+    • Cloned misp-docker GitHub repository
+    • Copied and customized template.env → production .env file
+    • Built and ran MISP container via docker-compose up
+    • Opened port 443 for remote access
+3. Feed Ingestion
+    • Copied public threat intelligence feeds into local MISP instance
+    • Waited 24+ hours for initial feed synchronization
+4. Sentinel Integration Script
+    • Cloned MISP-to-Sentinel integration script from GitHub
+    • Installed Python dependencies
+    • Configured config.py (copied from template) with:
+        ◦ Azure Tenant ID
+        ◦ MISP API key & domain
+        ◦ MISP event limit reduced from 500 → 200 (memory optimization for low-tier VM)
+    • Verified connectivity: MISP connection OK, Azure connection OK
+5. Troubleshooting & Optimization
+    • Issue: No logs appearing in Sentinel after 12+ hours
+    • Debugging: Inspected script logs, found no feed processing
+    • Root cause: Default MISP filters too narrow
+    • Resolution: Loosened filter criteria in script → new table ThreatIntel_Indicators appeared in Log Analytics workspace
+6. Detection Rule (KQL)
+    • Created analytics rule using Microsoft’s observability agent
+    • KQL query maps SSH brute-force attempts (IP addresses) against ingested threat intelligence indicators
+    • Currently observing for matches (indicator filter tuning in progress)
+
+Key Technical Decisions & Rationale (Security Perspective)
+Decision	Justification
+Docker on VM	Isolation + resource efficiency, Avoids dedicating a full VM to MISP, reduces Azure subscription costs.
+MISP (open-source)	Free, well-documented, ideal for learning threat intelligence APIs and Python integration.
+Python script over Azure Functions	Free trial limitations prevented Function App deployment; script co-located on MISP server ensures reliability.
+Reduced event limit (500→200)	Memory constraint mitigation on low-tier VM.
+Budget alerts	Proactive cost control after Azure credit anomaly.
+
+Current Status & Next Steps
+    • MISP instance running, feeds updating
+    • Sentinel receiving threat intelligence indicators
+    • KQL rule active for SSH brute-force detection
+    • Tuning indicator filters to improve detection rate
+
+Azure Services & Tools Used
+    • Virtual Machines (Ubuntu)
+    • Azure CLI
+    • Microsoft Sentinel (Log Analytics)
+    • Budget Alerts & Cost Management
+    • (Attempted) Azure Functions – trial limitations documented
