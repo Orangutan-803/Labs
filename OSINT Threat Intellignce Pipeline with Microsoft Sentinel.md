@@ -166,44 +166,18 @@ Implementation Steps
     
     • Currently observing for matches
 
-Note: The analytics rule relies on specific threat intelligence feeds. Given the narrow targeting of those indicators, incident generation is not guaranteed under normal test conditions.
-
 Key Technical Decisions & Rationale
-DECISION	                            JUSTIFICATION
-Docker on VM=>	                        Isolation + resource efficiency, Avoids dedicating a full VM to MISP, reduces Azure subscription costs.
-MISP (open-source)=>	                Free, well-documented, ideal for learning threat intelligence APIs and Python integration.
-Python script over Azure Functions=>	Free trial limitations prevented Function App deployment; script co-located on MISP server ensures reliability.
-Reduced event limit (500→200)	        Memory constraint mitigation on low-tier VM.
-Budget alerts	                        Proactive cost control after Azure credit anomaly.
 
-Current Status & Next Steps
-    • MISP instance running, feeds updating
-    • Sentinel receiving threat intelligence indicators
-    • KQL rule active for SSH brute-force detection
-    • Tuning indicator filters to improve detection rate
+    Docker on VM: Isolation + resource efficiency. Avoids dedicating a full VM to MISP, reduces Azure subscription costs.
 
-Azure Services & Tools Used
-    • Virtual Machines (Ubuntu)
-    • Azure CLI
-    • Microsoft Sentinel (Log Analytics)
-    • Budget Alerts & Cost Management
-    • (Attempted) Azure Functions – trial limitations documented
+    MISP (open-source): Free, well-documented, ideal for learning threat intelligence APIs and Python integration.
 
+    Python script over Azure Functions: Free trial limitations prevented Function App deployment; script co-located on MISP server ensures reliability.
 
+    Reduced event limit (500 → 200): Memory constraint mitigation on low-tier VM.
 
+    Budget alerts: Proactive cost control after Azure credit anomaly.
 
-
-
-
-
-
-Key Technical Decisions & Rationale
-Decision	Justification
-Docker on VM	Isolation + resource efficiency. Avoids dedicating a full VM to MISP, reduces Azure subscription costs.
-MISP (open-source)	Free, well-documented, ideal for learning threat intelligence APIs and Python integration.
-Python script over Azure Functions	Free trial limitations prevented Function App deployment; script co-located on MISP server ensures reliability.
-Reduced event limit (500 → 200)	Memory constraint mitigation on low-tier VM.
-Budget alerts	Proactive cost control after Azure credit anomaly.
 Current Status & Next Steps
 
     MISP instance running, feeds updating
