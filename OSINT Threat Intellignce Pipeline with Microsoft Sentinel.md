@@ -5,11 +5,11 @@ Integrated open-source threat intelligence into Microsoft Sentinel by deploying 
 Technical Architecture
 
     • Cloud Platform: Microsoft Azure (free trial & free services tier)
-    • Compute: Ubuntu VM (custom size with sufficient CPU cores after resource constraint analysis)
+    • Compute: Ubuntu VM (changed size with sufficient CPU cores after resource constraint analysis)
     • Containerization: Docker – isolated MISP deployment, preserving VM for future multi-service use
     • Threat Intelligence Platform: MISP (open-source, GitHub misp-docker repo)
     • Integration Layer: Python script running alongside MISP (Azure Functions attempted but limited by trial subscription)
-    • SIEM: Microsoft Sentinel (Log Analytics workspace, Threat Intelligence indicators table)
+    • SIEM: Microsoft Sentinel
 
 Implementation Steps
 
@@ -31,7 +31,7 @@ Implementation Steps
 
 2. MISP Deployment (Docker-based)
 
-    • Installed Docker on Ubuntu VM following official docs
+    • Installed Docker on Ubuntu VM
 
 <img width="856" height="276" alt="2 2 Docker installation successfull" src="https://github.com/user-attachments/assets/dfa51ce4-ca09-41a0-b534-52e468ed2578" />
 
@@ -69,7 +69,7 @@ Implementation Steps
 
 <img width="1695" height="867" alt="4 4 Job progress" src="https://github.com/user-attachments/assets/629e167f-41f4-404b-aabf-9350489f15de" />
     
-4. Sentinel Integration Script
+4. Sentinel Integration
 
     • Installed MISP2Sentinel Data connector from Content hub
 
@@ -80,7 +80,7 @@ Implementation Steps
     • Configuring MISP2Sentinel Data connector
 
         • Registering app
-
+        
 <img width="1109" height="852" alt="5 2 1 Registration app" src="https://github.com/user-attachments/assets/40432c02-a1be-409d-8f77-83f8fa91edc8" />
 <img width="1592" height="516" alt="5 2 2 reg success" src="https://github.com/user-attachments/assets/3e0302c3-2cec-4b98-ab09-18b0d1e7b217" />
 
@@ -106,7 +106,7 @@ Implementation Steps
         
  • Proceeding with running script on MISP VM instead
         
-    • Cloned MISP-to-Sentinel integration script from GitHub
+    • Cloned MISP2Sentinel integration script from GitHub
 
 <img width="853" height="209" alt="7 1 Repo clone" src="https://github.com/user-attachments/assets/914882d0-e7e3-4244-aaa2-1df5a21569bd" />
     
@@ -188,3 +188,42 @@ Azure Services & Tools Used
     • Microsoft Sentinel (Log Analytics)
     • Budget Alerts & Cost Management
     • (Attempted) Azure Functions – trial limitations documented
+
+
+
+
+
+
+
+
+
+Key Technical Decisions & Rationale
+Decision	Justification
+Docker on VM	Isolation + resource efficiency. Avoids dedicating a full VM to MISP, reduces Azure subscription costs.
+MISP (open-source)	Free, well-documented, ideal for learning threat intelligence APIs and Python integration.
+Python script over Azure Functions	Free trial limitations prevented Function App deployment; script co-located on MISP server ensures reliability.
+Reduced event limit (500 → 200)	Memory constraint mitigation on low-tier VM.
+Budget alerts	Proactive cost control after Azure credit anomaly.
+Current Status & Next Steps
+
+    MISP instance running, feeds updating
+
+    Sentinel receiving threat intelligence indicators
+
+    KQL rule active for SSH brute-force detection
+
+    Tuning indicator filters to improve detection rate
+
+    Note: The analytics rule relies on specific threat intelligence feeds. Given the narrow targeting of those indicators, incident generation is not guaranteed under normal test conditions.
+
+Azure Services & Tools Used
+
+    Virtual Machines (Ubuntu)
+
+    Azure CLI
+
+    Microsoft Sentinel (Log Analytics)
+
+    Budget Alerts & Cost Management
+
+    (Attempted) Azure Functions – trial limitations documented
