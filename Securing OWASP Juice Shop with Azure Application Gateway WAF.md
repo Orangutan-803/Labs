@@ -65,33 +65,31 @@ The Juice Shop container remained publicly accessible behind the WAF - a securit
 
 <img alt="8 0 Container still accessible through ct IP" src="https://github.com/user-attachments/assets/1f14d141-9033-43f8-83d9-e056bffa5569" />
 
-Azure doesn't allow moving existing ACI or Application Gateway resources to different VNets. I recreated:
+Found out Azure doesn't allow moving existing ACI or Application Gateway resources to different VNets. 
 <img alt="8 1 Consulting" src="https://github.com/user-attachments/assets/656eeaa0-3cd6-412a-9f59-c262e4e868fd" />
 <img alt="8 4 WAF Pvnet consultation" src="https://github.com/user-attachments/assets/84594d92-8f3a-4ae8-8825-067dde5b4a36" />
-  
+
+I Recreated:
+
     A new Juice Shop container inside a private VNet (no public exposure)
 <img alt="8 3 Creating new PVent" src="https://github.com/user-attachments/assets/42c62fc6-55e9-413f-b4f6-c0060e819d34" />
 
-    A new Application Gateway WAF after deleting the old one (hit public IP limits)
+    Diagnosed why I couldn't use the ACI's VNET for the new Application Gateway WAF with AI.
 
 <img alt="8 5 VNET conflict issue" src="https://github.com/user-attachments/assets/9c5583e3-c851-437e-87a5-96e904aee9cc" />
 <img alt="8 6 Consulting" src="https://github.com/user-attachments/assets/dadcfdd6-2c84-412e-8591-853b55395aec" />
 <img alt="8 7 Vnet peering" src="https://github.com/user-attachments/assets/c4a05ad1-005c-4cb5-af39-f83fc11b9b87" />
 
-    VNet peering between the WAF's VNet and the container's VNet (WAF must be in a separate VNet)
+    Creating new Gateway & VNet peering between the WAF's & container's VNet
 
 <img alt="8 8 Creating WAF vnet" src="https://github.com/user-attachments/assets/673235f6-58b4-4c96-a2e9-18c1e4ee6b77" />
 <img alt="8 9 Creating Frontend" src="https://github.com/user-attachments/assets/ec11fc42-4017-4530-a67c-f5fdc77a35e5" />
 <img alt="8 9 1 Associating Backend" src="https://github.com/user-attachments/assets/fcf69d99-270a-4efd-8a47-1703ab92cdf8" />
-<img alt="8 9 2 error" src="https://github.com/user-attachments/assets/579d5dc6-1e5f-4256-b0a4-e2b3cbabc8b7" />
-<img alt="8 9 3 deleting prev resources" src="https://github.com/user-attachments/assets/e43a50b6-8cc7-44f6-9f9e-f5a6dc019f03" />
 <img alt="8 9 4 Peer Link" src="https://github.com/user-attachments/assets/edaf99ce-cf77-4853-b7ad-33a08d36c5fc" />
 <img alt="8 9 4 1" src="https://github.com/user-attachments/assets/1a46c157-a531-42cd-81b2-ce0bcb2a5d63" />
 
 
-    Fixed another 502 by opening the correct port (3000 instead of 80) on the container
-
-
+    Fixed another 502 by redeploying ACI with the correct port (3000 instead of 80) on the container
 
 
 # Final Architecture & Results
@@ -107,7 +105,10 @@ Azure doesn't allow moving existing ACI or Application Gateway resources to diff
 
 
 # Key takeaway
-Always plan network isolation upfront – moving resources between VNets in Azure requires recreation. VNet peering is the clean way to connect a private backend to a WAF. This lab accurately simulates how to secure a vulnerable web app using Azure's managed WAF.
+
+This lab demonstrates a layered security approach; first applying WAF to block OWASP Top 10 threats, then eliminating public exposure by moving the backend into a private VNet accessible only via the WAF. 
+
+Always plan network isolation upfront as moving resources between VNets in Azure requires recreation. VNet peering is the clean way to connect a private backend to a WAF. This lab accurately simulates how to secure a vulnerable web app using Azure's managed WAF.
 
 # Tech stack
 Azure Container Instances, Application Gateway WAF (OWASP rules), VNet peering, Log Analytics.
