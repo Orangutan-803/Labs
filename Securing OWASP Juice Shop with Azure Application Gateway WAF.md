@@ -67,13 +67,10 @@ The Juice Shop container remained publicly accessible behind the WAF - a securit
 
 Azure doesn't allow moving existing ACI or Application Gateway resources to different VNets. I recreated:
 <img alt="8 1 Consulting" src="https://github.com/user-attachments/assets/656eeaa0-3cd6-412a-9f59-c262e4e868fd" />
-
-
-    A new Juice Shop container inside a private VNet (no public exposure)
-<img alt="8 2 Creating container with PVT VNET" src="https://github.com/user-attachments/assets/5b51d5dd-88fc-465d-94e2-105070ade166" />
-<img alt="8 3 Creating new PVent" src="https://github.com/user-attachments/assets/42c62fc6-55e9-413f-b4f6-c0060e819d34" />
 <img alt="8 4 WAF Pvnet consultation" src="https://github.com/user-attachments/assets/84594d92-8f3a-4ae8-8825-067dde5b4a36" />
   
+    A new Juice Shop container inside a private VNet (no public exposure)
+<img alt="8 3 Creating new PVent" src="https://github.com/user-attachments/assets/42c62fc6-55e9-413f-b4f6-c0060e819d34" />
 
     A new Application Gateway WAF after deleting the old one (hit public IP limits)
 
