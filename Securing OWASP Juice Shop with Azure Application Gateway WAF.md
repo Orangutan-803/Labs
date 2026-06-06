@@ -33,7 +33,7 @@ I deployed the intentionally vulnerable OWASP Juice Shop on Azure Container Inst
 <img src="https://github.com/user-attachments/assets/866ad32b-6a7e-4a08-992c-8609c694b8b0" />
 <img src="https://github.com/user-attachments/assets/31bbeeba-0aa2-46fd-93e3-b6f492996f62" />
 
-    Faced 502 Bad Gateway → recreated a new backendpool by mistake - missing target IP in backend pool (fixed)
+    Faced 502 Bad Gateway → recreated a new backendpool during configuration by mistake - missing target IP in backend pool (fixed)
 
 <img src="https://github.com/user-attachments/assets/316bb759-b201-4fac-b9e2-ed041952e2bf" />
 <img src="https://github.com/user-attachments/assets/602c15e6-c6da-44e7-b8a3-568740fb9bb4" />
