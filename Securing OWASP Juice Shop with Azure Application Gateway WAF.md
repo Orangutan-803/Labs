@@ -1,6 +1,9 @@
-This lab simulates real-world protection of a vulnerable web application using Azure's Web Application Firewall (WAF). Deploying the intentionally vulnerable OWASP Juice Shop on Azure Container Instances (ACI) to test and mitigate SQL injection attacks.
+# Objective
+This lab simulates a real-world scenario: securing a deliberately vulnerable web app using Azure WAF, then further hardening it by moving a public-facing Azure Container Instance (ACI) into a private virtual network.
 
-Initial Setup & Vulnerability Validation
+I deployed the intentionally vulnerable OWASP Juice Shop on Azure Container Instances (ACI) to test and mitigate SQL injection attacks using Azure's Web Application Firewall (WAF).
+
+# Initial Setup & Vulnerability Validation
 
     Deployed Juice Shop container via ACI (public IP by default)
 
@@ -12,7 +15,7 @@ Initial Setup & Vulnerability Validation
 <img src="https://github.com/user-attachments/assets/3860e81f-093e-4a39-83f4-9b7a30a9cdb3" />
 <img src="https://github.com/user-attachments/assets/1fe19a94-ed00-4d5f-bc6f-9225cadab54c" />
 
-WAF Deployment (First Attempt)
+# WAF Deployment (First Attempt)
 
     Created a new Virtual Network (VNet) to isolate the container
 
@@ -30,7 +33,7 @@ WAF Deployment (First Attempt)
 <img src="https://github.com/user-attachments/assets/866ad32b-6a7e-4a08-992c-8609c694b8b0" />
 <img src="https://github.com/user-attachments/assets/31bbeeba-0aa2-46fd-93e3-b6f492996f62" />
 
-    Faced 502 Bad Gateway → missing target IP in backend pool (fixed)
+    Faced 502 Bad Gateway → recreated a new backendpool by mistake - missing target IP in backend pool (fixed)
 
 <img src="https://github.com/user-attachments/assets/316bb759-b201-4fac-b9e2-ed041952e2bf" />
 <img src="https://github.com/user-attachments/assets/602c15e6-c6da-44e7-b8a3-568740fb9bb4" />
@@ -56,7 +59,11 @@ WAF Deployment (First Attempt)
 <img src="https://github.com/user-attachments/assets/18e2af1b-ca54-496b-9854-b62ae8830a0f" />
 
 
-Moving to a Private Network (Recreation Required)
+# Moving to a Private Network (Hardening Step)
+
+The Juice Shop container remained publicly accessible behind the WAF - a security gap. 
+
+<img alt="8 0 Container still accessible through ct IP" src="https://github.com/user-attachments/assets/1f14d141-9033-43f8-83d9-e056bffa5569" />
 
 Azure doesn't allow moving existing ACI or Application Gateway resources to different VNets. I recreated:
 <img alt="8 1 Consulting" src="https://github.com/user-attachments/assets/656eeaa0-3cd6-412a-9f59-c262e4e868fd" />
@@ -90,7 +97,7 @@ Azure doesn't allow moving existing ACI or Application Gateway resources to diff
 
 
 
-Final Architecture & Results
+# Final Architecture & Results
 
     Juice Shop is not publicly reachable – all traffic must go through the WAF
 
@@ -102,8 +109,8 @@ Final Architecture & Results
 <img alt="10 1 SQL match" src="https://github.com/user-attachments/assets/38858453-987e-4c86-ac77-420ca902d6bf" />
 
 
-Key takeaway
+# Key takeaway
 Always plan network isolation upfront – moving resources between VNets in Azure requires recreation. VNet peering is the clean way to connect a private backend to a WAF. This lab accurately simulates how to secure a vulnerable web app using Azure's managed WAF.
 
-Tech stack
+# Tech stack
 Azure Container Instances, Application Gateway WAF (OWASP rules), VNet peering, Log Analytics.
